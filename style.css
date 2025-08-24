@@ -52,3 +52,10 @@ button:hover {
   from { background-color: #f7c5c5; }
   to { background-color: #f0f0f0; }
 }
+
+
+#final-score {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 1em;
+}
