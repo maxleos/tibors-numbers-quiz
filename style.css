@@ -36,11 +36,11 @@ button:hover {
 }
 
 .flash-correct {
-  animation: flashGreen 0.4s;
+  animation: flashGreen 0.7s;
 }
 
 .flash-wrong {
-  animation: flashRed 0.4s;
+  animation: flashRed 0.7s;
 }
 
 @keyframes flashGreen {
