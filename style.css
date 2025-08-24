@@ -1,0 +1,54 @@
+
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: #f0f0f0;
+  margin: 0;
+  padding: 2em;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+}
+
+h1 {
+  margin-bottom: 1em;
+}
+
+button {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  padding: 12px 20px;
+  margin: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
+#task {
+  font-size: 24px;
+  margin: 1.5em 0;
+}
+
+.flash-correct {
+  animation: flashGreen 0.4s;
+}
+
+.flash-wrong {
+  animation: flashRed 0.4s;
+}
+
+@keyframes flashGreen {
+  from { background-color: #c8f7c5; }
+  to { background-color: #f0f0f0; }
+}
+
+@keyframes flashRed {
+  from { background-color: #f7c5c5; }
+  to { background-color: #f0f0f0; }
+}

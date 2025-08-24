@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tibor's Numbers Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1 id="title">Tibor's Numbers Quiz</h1>
+    <div id="start-screen">
+      <p>Select a level:</p>
+      <button onclick="startGame('basic')">Basic</button>
+      <button onclick="startGame('intermediate')">Intermediate</button>
+      <button onclick="startGame('hard')">Hard</button>
+    </div>
+
+    <div id="game-screen" style="display:none;">
+      <div id="task"></div>
+      <div id="answers"></div>
+    </div>
+
+    <div id="end-screen" style="display:none;">
+      <h2>Game Finished!</h2>
+      <p id="final-score"></p>
+      <button onclick="resetGame()">Play again</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
