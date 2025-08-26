@@ -11,10 +11,7 @@ function generateStarterTasks() {
   // Subtraction (0–9 only)
   for (let i = 0; i <= 9; i++) {
     for (let j = 0; j <= 9; j++) {
-      const result = i - j;
-      if (result >= -10 && result < 20) {
-        all.push({ q: `${i} - ${j}`, a: result });
-      }
+      all.push({ q: `${i} - ${j}`, a: i - j });
     }
   }
 
