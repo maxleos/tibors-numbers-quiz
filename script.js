@@ -8,7 +8,7 @@ let timer = null;
 
 function startGame(level) {
   currentLevel = level;
-  timeout = level === "basic" ? 15000 : level === "intermediate" ? 10000 : 5000;
+  timeout = level === "basic" ? 10000 : level === "intermediate" ? 5000 : 1000;
   document.getElementById("start-screen").style.display = "none";
   document.getElementById("game-screen").style.display = "block";
   generateTasks();
@@ -22,8 +22,8 @@ function generateTasks() {
       if (i + j <= 20) all.push({ q: `${i} + ${j}`, a: i + j });
     }
   }
-  for (let i = 0; i < 20; i++) {
-    for (let j = 0; j < 20; j++) {
+  for (let i = -9; i < 20; i++) {
+    for (let j = -9; j < 20; j++) {
       if (i - j > -10 && i - j < 20) all.push({ q: `${i} - ${j}`, a: i - j });
     }
   }
@@ -67,22 +67,20 @@ function selectAnswer(ans) {
   const isCorrect = ans === correct;
   if (isCorrect) correctCount++;
   flashScreen(isCorrect);
-  setTimeout(nextTask, 1500);
+  setTimeout(nextTask, 300);
 }
 
 function flashScreen(correct) {
   const screen = document.body;
   screen.classList.remove("flash-correct", "flash-wrong");
   void screen.offsetWidth; // trigger reflow
-  
-  const smiley = document.getElementById("smiley");
-  if (smiley) {
-    smiley.src = correct ? "smiley_smiling.webp" : "smiley_neutral.webp";
-    smiley.style.display = "block";
-    setTimeout(() => { smiley.style.display = "none"; }, 1500);
-  }
-
   screen.classList.add(correct ? "flash-correct" : "flash-wrong");
+
+  const smiley = document.getElementById("smiley");
+  smiley.src = correct ? "smiley_smiling.webp" : "smiley_neutral.webp";
+  smiley.style.display = "block";
+  setTimeout(() => { smiley.style.display = "none"; }, 1500);
+
 }
 
 function nextTask() {

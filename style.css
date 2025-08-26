@@ -36,11 +36,11 @@ button:hover {
 }
 
 .flash-correct {
-  animation: flashGreen 1.5s;
+  animation: flashGreen 0.4s;
 }
 
 .flash-wrong {
-  animation: flashRed 1.5s;
+  animation: flashRed 0.4s;
 }
 
 @keyframes flashGreen {
@@ -53,19 +53,10 @@ button:hover {
   to { background-color: #f0f0f0; }
 }
 
-
-#final-score {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 1em;
-}
-
 #smiley {
-  position: fixed;
-  top: 20px;
-  left: 50%;
+  position: static;
+    left: 50%;
   transform: translateX(-50%);
-  height: 80px;
-  z-index: 10;
-  display: none;
+  height: 160px;
+    display: none;
 }
