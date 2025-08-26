@@ -54,7 +54,7 @@ function generateStarterTasks() {
       all.push({ q: `${i} × ${j}`, a: i * j });
     }
   }
-
+}
 
 
 
