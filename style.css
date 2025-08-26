@@ -59,9 +59,3 @@ button:hover {
   margin: 1em auto 0 auto;
   height: 160px;
 }
-
-/* Prevent clicks from being processed during feedback */
-#answers.locked { pointer-events: none; }
-
-/* Visual feedback for the chosen option */
-#answers button.clicked { opacity: 0.55; }
