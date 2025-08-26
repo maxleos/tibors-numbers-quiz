@@ -77,7 +77,7 @@ function flashScreen(correct) {
   
   const smiley = document.getElementById("smiley");
   if (smiley) {
-    smiley.src = correct ? "smiley_smiling.png" : "smiley_neutral.png";
+    smiley.src = correct ? "smiley_smiling.webp" : "smiley_neutral.webp";
     smiley.style.display = "block";
     setTimeout(() => { smiley.style.display = "none"; }, 1500);
   }
