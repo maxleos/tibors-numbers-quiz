@@ -22,8 +22,8 @@ function generateTasks() {
       if (i + j <= 20) all.push({ q: `${i} + ${j}`, a: i + j });
     }
   }
-  for (let i = 0; i < 20; i++) {
-    for (let j = 0; j < 20; j++) {
+  for (let i = -9; i < 20; i++) {
+    for (let j = -9; j < 20; j++) {
       if (i - j > -10 && i - j < 20) all.push({ q: `${i} - ${j}`, a: i - j });
     }
   }
@@ -67,7 +67,7 @@ function selectAnswer(ans) {
   const isCorrect = ans === correct;
   if (isCorrect) correctCount++;
   flashScreen(isCorrect);
-  setTimeout(nextTask, 1500);
+  setTimeout(nextTask, 300);
 }
 
 function flashScreen(correct) {
