@@ -119,15 +119,19 @@ function selectAnswer(ans) {
   if (locked) return;
   locked = true;
   setButtonsDisabled(true);
-  document.getElementById('answers').classList.add('locked');
+
   // dim the clicked button
-  const btns = document.querySelectorAll('#answers button');
-  btns.forEach(b => { if (parseInt(b.textContent, 10) === ans) b.classList.add('clicked'); });
-  clearTimeout(timer);
+  const btns = document.querySelectorAll("#answers button");
+  btns.forEach(b => {
+    if (parseInt(b.textContent, 10) === ans) {
+      b.classList.add("clicked");
+    }
+  });
+
   const correct = tasks[currentIndex].a;
   const isCorrect = ans === correct;
   if (isCorrect) correctCount++;
-  flashScreen(isCorrect, true);
+  flashScreen(isCorrect);   
 }
 
 function flashScreen(correct, advanceAfter = false) {
