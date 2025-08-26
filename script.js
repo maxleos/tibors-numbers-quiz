@@ -67,13 +67,21 @@ function selectAnswer(ans) {
   const isCorrect = ans === correct;
   if (isCorrect) correctCount++;
   flashScreen(isCorrect);
-  setTimeout(nextTask, 300);
+  setTimeout(nextTask, 1500);
 }
 
 function flashScreen(correct) {
   const screen = document.body;
   screen.classList.remove("flash-correct", "flash-wrong");
   void screen.offsetWidth; // trigger reflow
+  
+  const smiley = document.getElementById("smiley");
+  if (smiley) {
+    smiley.src = correct ? "smiley_smiling.png" : "smiley_neutral.png";
+    smiley.style.display = "block";
+    setTimeout(() => { smiley.style.display = "none"; }, 1500);
+  }
+
   screen.classList.add(correct ? "flash-correct" : "flash-wrong");
 }
 
