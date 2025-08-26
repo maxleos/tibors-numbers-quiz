@@ -8,7 +8,7 @@ let timer = null;
 
 function startGame(level) {
   currentLevel = level;
-  timeout = level === "basic" ? 15000 : level === "intermediate" ? 10000 : 5000;
+  timeout = level === "basic" ? 10000 : level === "intermediate" ? 5000 : 1000;
   document.getElementById("start-screen").style.display = "none";
   document.getElementById("game-screen").style.display = "block";
   generateTasks();
@@ -74,14 +74,6 @@ function flashScreen(correct) {
   const screen = document.body;
   screen.classList.remove("flash-correct", "flash-wrong");
   void screen.offsetWidth; // trigger reflow
-  
-  const smiley = document.getElementById("smiley");
-  if (smiley) {
-    smiley.src = correct ? "smiley_smiling.png" : "smiley_neutral.png";
-    smiley.style.display = "block";
-    setTimeout(() => { smiley.style.display = "none"; }, 1500);
-  }
-
   screen.classList.add(correct ? "flash-correct" : "flash-wrong");
 }
 
