@@ -5,6 +5,7 @@ let currentIndex = 0;
 let correctCount = 0;
 let tasks = [];
 let timer = null;
+let locked = false; // prevents double-clicks between tasks
 
 function generateStarterTasks() {
   const all = [];
@@ -76,6 +77,11 @@ function startGame(level) {
   showTask();
 }
 
+function setButtonsDisabled(state) {
+  const btns = document.querySelectorAll('#answers button');
+  btns.forEach(b => b.disabled = !!state);
+}
+
 function showTask() {
   if (currentIndex >= tasks.length) {
     endGame();
@@ -107,6 +113,9 @@ function showTask() {
   }, timeout);
 }
 function selectAnswer(ans) {
+  if (locked) return;
+  locked = true;
+  setButtonsDisabled(true);
   clearTimeout(timer);
   const correct = tasks[currentIndex].a;
   const isCorrect = ans === correct;
