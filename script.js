@@ -1,3 +1,33 @@
+function generateStarterTasks() {
+  const all = [];
+
+  // Addition (0–9 only)
+  for (let i = 0; i <= 9; i++) {
+    for (let j = 0; j <= 9; j++) {
+      all.push({ q: `${i} + ${j}`, a: i + j });
+    }
+  }
+
+  // Subtraction (0–9 only)
+  for (let i = 0; i <= 9; i++) {
+    for (let j = 0; j <= 9; j++) {
+      const result = i - j;
+      if (result >= -10 && result < 20) {
+        all.push({ q: `${i} - ${j}`, a: result });
+      }
+    }
+  }
+
+  // Multiplication (0–9 only)
+  for (let i = 0; i <= 9; i++) {
+    for (let j = 0; j <= 9; j++) {
+      all.push({ q: `${i} × ${j}`, a: i * j });
+    }
+  }
+
+  shuffle(all);
+  tasks = all.slice(0, 20);
+}
 
 let currentLevel = null;
 let timeout = 10000;
@@ -8,54 +38,17 @@ let timer = null;
 
 function startGame(level) {
   currentLevel = level;
-
-  // Set timeout by level
-  timeout = level === "starter" ? 15000 :
-            level === "basic" ? 15000 :
-            level === "intermediate" ? 10000 : 5000;
-
+  timeout = level === "basic" ? 10000 : level === "intermediate" ? 5000 : 1000;
   document.getElementById("start-screen").style.display = "none";
   document.getElementById("game-screen").style.display = "block";
-
-  // Choose appropriate task generator
+  
   if (level === "starter") {
     generateStarterTasks();
   } else {
     generateTasks();
   }
-
   showTask();
 }
-
-
-function generateStarterTasks() {
-  const all = [];
-
-  // Addition: only 0–9 operands
-  for (let i = 0; i <= 9; i++) {
-    for (let j = 0; j <= 9; j++) {
-      all.push({ q: `${i} + ${j}`, a: i + j });
-    }
-  }
-
-  // Subtraction: only 0–9 operands
-  for (let i = 0; i <= 9; i++) {
-    for (let j = 0; j <= 9; j++) {
-      const result = i - j;
-      if (result >= -10 && result < 20) {
-        all.push({ q: `${i} - ${j}`, a: result });
-      }
-    }
-  }
-
-  // Multiplication: only 0–9 operands
-  for (let i = 0; i <= 9; i++) {
-    for (let j = 0; j <= 9; j++) {
-      all.push({ q: `${i} × ${j}`, a: i * j });
-    }
-  }
-}
-
 
 
 function generateTasks() {
