@@ -116,7 +116,7 @@ function selectAnswer(ans) {
   const isCorrect = ans === correct;
   if (isCorrect) correctCount++;
   flashScreen(isCorrect);
-  setTimeout(nextTask, 300);
+  setTimeout(nextTask, 1500);
 }
 
 function flashScreen(correct) {
