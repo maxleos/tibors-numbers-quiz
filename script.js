@@ -34,6 +34,11 @@ let correctCount = 0;
 let tasks = [];
 let timer = null;
 
+
+
+function startGame(level) {
+  currentLevel = level;
+
 function startGame(level) {
   currentLevel = level;
 
@@ -42,17 +47,16 @@ function startGame(level) {
             level === "intermediate" ? 10000 : 5000;
 
   if (level === 'starter') {
-    generateStarterTasks();  // ✅ Only call this for 'starter'
+    generateStarterTasks();  
   } else {
-    generateTasks();         // ✅ Others use the default
+    generateTasks();        
   }
 
   document.getElementById("start-screen").style.display = "none";
   document.getElementById("game-screen").style.display = "block";
 
-  showTask();  // ✅ Show the first task
+  showTask();  
 }
-
 
 function generateTasks() {
   const all = [];
