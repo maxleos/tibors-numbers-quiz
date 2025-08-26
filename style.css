@@ -59,10 +59,3 @@ button:hover {
   margin: 1em auto 0 auto;
   height: 160px;
 }
-
-/* Ensure dynamically created answer buttons never look disabled/greyed */
-#answers button {
-  background-color: #fff !important;
-  color: #000;
-  opacity: 1 !important;
-}
