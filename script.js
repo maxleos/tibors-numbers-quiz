@@ -8,14 +8,25 @@ let timer = null;
 
 function startGame(level) {
   currentLevel = level;
+
+  // Set timeout by level
   timeout = level === "starter" ? 15000 :
-          level === "basic" ? 10000 :
-          level === "intermediate" ? 5000 : 1000;
+            level === "basic" ? 15000 :
+            level === "intermediate" ? 10000 : 5000;
+
   document.getElementById("start-screen").style.display = "none";
   document.getElementById("game-screen").style.display = "block";
-  generateTasks();
+
+  // Choose appropriate task generator
+  if (level === "starter") {
+    generateStarterTasks();
+  } else {
+    generateTasks();
+  }
+
   showTask();
 }
+
 
 function generateStarterTasks() {
   const all = [];
