@@ -49,8 +49,7 @@ function startGame(level) {
          level === "intermediate" ? 10000 : 5000;
   document.getElementById("start-screen").style.display = "none";
   document.getElementById("game-screen").style.display = "block";
-  generateTasks();
-  showTask();
+  showTask();  
 }
 
 
