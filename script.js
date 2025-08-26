@@ -8,7 +8,7 @@ let timer = null;
 
 function startGame(level) {
   currentLevel = level;
-  timeout = level === "basic" ? 10000 : level === "intermediate" ? 5000 : 1000;
+  timeout = level === "starter" ? 15000 : level === "basic" ? 10000 : level === "intermediate" ? 5000 : 1000;
   document.getElementById("start-screen").style.display = "none";
   document.getElementById("game-screen").style.display = "block";
   generateTasks();
@@ -17,7 +17,7 @@ function startGame(level) {
 
 
 function generateTasks() {
-  const isStarter = level === "starter";
+  const isStarter = currentLevel === "starter";
   const all = [];
   // Addition: i + j <= 20
   for (let i = 0; i <= (isStarter ? 9 : 20); i++) {
