@@ -17,16 +17,17 @@ function startGame(level) {
 
 
 function generateTasks() {
+  const isStarter = level === "starter";
   const all = [];
   // Addition: i + j <= 20
-  for (let i = 0; i <= 20; i++) {
-    for (let j = 0; j <= 20; j++) {
+  for (let i = 0; i <= (isStarter ? 9 : 20); i++) {
+    for (let j = 0; j <= (isStarter ? 9 : 20); j++) {
       if (i + j <= 20) all.push({ q: `${i} + ${j}`, a: i + j });
     }
   }
   // Subtraction: use only non-negative integers in question string, but allow negative result
-  for (let i = 0; i <= 20; i++) {
-    for (let j = 0; j <= 20; j++) {
+  for (let i = 0; i <= (isStarter ? 9 : 20); i++) {
+    for (let j = 0; j <= (isStarter ? 9 : 20); j++) {
       const result = i - j;
       if (result >= -10 && result < 20) {
         all.push({ q: `${i} - ${j}`, a: result });
@@ -34,8 +35,8 @@ function generateTasks() {
     }
   }
   // Multiplication: 0 to 10
-  for (let i = 0; i <= 10; i++) {
-    for (let j = 0; j <= 10; j++) {
+  for (let i = 0; i <= (isStarter ? 9 : 10); i++) {
+    for (let j = 0; j <= (isStarter ? 9 : 10); j++) {
       all.push({ q: `${i} × ${j}`, a: i * j });
     }
   }
