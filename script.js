@@ -1,31 +1,3 @@
-function generateStarterTasks() {
-  const all = [];
-
-  // Addition (0–9 only)
-  for (let i = 0; i <= 9; i++) {
-    for (let j = 0; j <= 9; j++) {
-      all.push({ q: `${i} + ${j}`, a: i + j });
-    }
-  }
-
-  // Subtraction (0–9 only)
-  for (let i = 0; i <= 9; i++) {
-    for (let j = 0; j <= 9; j++) {
-      all.push({ q: `${i} - ${j}`, a: i - j });
-    }
-  }
-
-  // Multiplication (0–9 only)
-  for (let i = 0; i <= 9; i++) {
-    for (let j = 0; j <= 9; j++) {
-      all.push({ q: `${i} × ${j}`, a: i * j });
-    }
-  }
-
-  shuffle(all);
-  tasks = all.slice(0, 20);
-}
-
 
 let currentLevel = null;
 let timeout = 10000;
@@ -34,39 +6,40 @@ let correctCount = 0;
 let tasks = [];
 let timer = null;
 
+function generateStarterTasks() {
+  const all = [];
 
-
-function startGame(level) {
-  currentLevel = level;
-
-function startGame(level) {
-  currentLevel = level;
-
-  timeout = level === "starter" ? 15000 :
-            level === "basic" ? 15000 :
-            level === "intermediate" ? 10000 : 5000;
-
-  if (level === 'starter') {
-    generateStarterTasks();  
-  } else {
-    generateTasks();        
+  for (let i = 0; i <= 9; i++) {
+    for (let j = 0; j <= 9; j++) {
+      all.push({ q: `${i} + ${j}`, a: i + j });
+    }
   }
 
-  document.getElementById("start-screen").style.display = "none";
-  document.getElementById("game-screen").style.display = "block";
+  for (let i = 0; i <= 9; i++) {
+    for (let j = 0; j <= 9; j++) {
+      all.push({ q: `${i} - ${j}`, a: i - j });
+    }
+  }
 
-  showTask();  
+  for (let i = 0; i <= 9; i++) {
+    for (let j = 0; j <= 9; j++) {
+      all.push({ q: `${i} × ${j}`, a: i * j });
+    }
+  }
+
+  shuffle(all);
+  tasks = all.slice(0, 20);
 }
 
 function generateTasks() {
   const all = [];
-  // Addition: i + j <= 20
+
   for (let i = 0; i <= 20; i++) {
     for (let j = 0; j <= 20; j++) {
       if (i + j <= 20) all.push({ q: `${i} + ${j}`, a: i + j });
     }
   }
-  // Subtraction: use only non-negative integers in question string, but allow negative result
+
   for (let i = 0; i <= 20; i++) {
     for (let j = 0; j <= 20; j++) {
       const result = i - j;
@@ -75,14 +48,32 @@ function generateTasks() {
       }
     }
   }
-  // Multiplication: 0 to 10
+
   for (let i = 0; i <= 10; i++) {
     for (let j = 0; j <= 10; j++) {
       all.push({ q: `${i} × ${j}`, a: i * j });
     }
   }
+
   shuffle(all);
   tasks = all.slice(0, 20);
+}
+
+function startGame(level) {
+  currentLevel = level;
+  timeout = level === "starter" ? 15000 :
+            level === "basic" ? 15000 :
+            level === "intermediate" ? 10000 : 5000;
+
+  if (level === "starter") {
+    generateStarterTasks();
+  } else {
+    generateTasks();
+  }
+
+  document.getElementById("start-screen").style.display = "none";
+  document.getElementById("game-screen").style.display = "block";
+  showTask();
 }
 
 function showTask() {
@@ -90,6 +81,7 @@ function showTask() {
     endGame();
     return;
   }
+
   const task = tasks[currentIndex];
   document.getElementById("task").textContent = task.q + " = ?";
   const correct = task.a;
@@ -100,13 +92,14 @@ function showTask() {
       options.push(wrong);
     }
   }
+
   shuffle(options);
   document.getElementById("answers").innerHTML = options.map(opt =>
     `<button onclick="selectAnswer(${opt})">${opt}</button>`
   ).join("");
+
   timer = setTimeout(() => {
-    flashScreen(false);
-    nextTask();
+    flashScreen(false, true);
   }, timeout);
 }
 
@@ -115,21 +108,25 @@ function selectAnswer(ans) {
   const correct = tasks[currentIndex].a;
   const isCorrect = ans === correct;
   if (isCorrect) correctCount++;
-  flashScreen(isCorrect);
-  setTimeout(nextTask, 1500);
+  flashScreen(isCorrect, true);
 }
 
-function flashScreen(correct) {
+function flashScreen(correct, advanceAfter = false) {
   const screen = document.body;
   screen.classList.remove("flash-correct", "flash-wrong");
-  void screen.offsetWidth; // trigger reflow
+  void screen.offsetWidth;
   screen.classList.add(correct ? "flash-correct" : "flash-wrong");
 
   const smiley = document.getElementById("smiley");
   smiley.src = correct ? "smiley_smiling.webp" : "smiley_neutral.webp";
   smiley.style.display = "block";
-  setTimeout(() => { smiley.style.display = "none"; }, 1500);
 
+  setTimeout(() => {
+    smiley.style.display = "none";
+    if (advanceAfter) {
+      nextTask();
+    }
+  }, 1500);
 }
 
 function nextTask() {
