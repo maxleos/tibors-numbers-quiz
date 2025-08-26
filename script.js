@@ -5,7 +5,7 @@ let currentIndex = 0;
 let correctCount = 0;
 let tasks = [];
 let timer = null;
-let locked = false; // prevents double-clicks between tasks
+let locked = false; // lock inputs during feedback to prevent double clicks
 
 function generateStarterTasks() {
   const all = [];
@@ -109,6 +109,9 @@ function showTask() {
   ).join("");
 
   timer = setTimeout(() => {
+    locked = true;
+    setButtonsDisabled(true);
+    document.getElementById('answers').classList.add('locked');
     flashScreen(false, true);
   }, timeout);
 }
@@ -116,6 +119,10 @@ function selectAnswer(ans) {
   if (locked) return;
   locked = true;
   setButtonsDisabled(true);
+  document.getElementById('answers').classList.add('locked');
+  // dim the clicked button
+  const btns = document.querySelectorAll('#answers button');
+  btns.forEach(b => { if (parseInt(b.textContent, 10) === ans) b.classList.add('clicked'); });
   clearTimeout(timer);
   const correct = tasks[currentIndex].a;
   const isCorrect = ans === correct;
