@@ -54,9 +54,8 @@ button:hover {
 }
 
 #smiley {
+  display: block;
   position: static;
-    left: 50%;
-  transform: translateX(-50%);
+  margin: 1em auto 0 auto;
   height: 160px;
-    display: none;
 }
