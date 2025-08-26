@@ -38,19 +38,22 @@ let tasks = [];
 let timer = null;
 
 function startGame(level) {
-  if (level === 'starter') {
-    generateStarterTasks();
-  } else {
-    generateTasks();
-  }
   currentLevel = level;
+
   timeout = level === "starter" ? 15000 :
-         level === "basic" ? 15000 :
-         level === "intermediate" ? 10000 : 5000;
+            level === "basic" ? 15000 :
+            level === "intermediate" ? 10000 : 5000;
+
+  if (level === 'starter') {
+    generateStarterTasks();  // ✅ Only call this for 'starter'
+  } else {
+    generateTasks();         // ✅ Others use the default
+  }
+
   document.getElementById("start-screen").style.display = "none";
   document.getElementById("game-screen").style.display = "block";
-  generateTasks();
-  showTask();
+
+  showTask();  // ✅ Show the first task
 }
 
 
