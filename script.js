@@ -86,6 +86,7 @@ function showTask() {
   document.getElementById("task").textContent = task.q + " = ?";
   const correct = task.a;
   const options = [correct];
+
   while (options.length < 3) {
     let wrong = correct + Math.floor(Math.random() * 10) - 5;
     if (!options.includes(wrong) && wrong >= -10 && wrong <= 100) {
@@ -94,6 +95,9 @@ function showTask() {
   }
 
   shuffle(options);
+
+  document.getElementById("answers").innerHTML = "";
+
   document.getElementById("answers").innerHTML = options.map(opt =>
     `<button onclick="selectAnswer(${opt})">${opt}</button>`
   ).join("");
@@ -102,7 +106,6 @@ function showTask() {
     flashScreen(false, true);
   }, timeout);
 }
-
 function selectAnswer(ans) {
   clearTimeout(timer);
   const correct = tasks[currentIndex].a;
